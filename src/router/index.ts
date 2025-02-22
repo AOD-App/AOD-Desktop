@@ -1,8 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
-import App from "@/App.vue"; // Load App.vue directly
+import HomePage from "../../pages/HomePage.vue";
+import SettingsPage from "../../pages/SettingsPage.vue";
 
 const routes = [
-  { path: "/", component: App },
+  { path: "/", component: HomePage },  // Now HomePage manages ConnectionStatus & FeatureCards
+  { path: "/settings", component: SettingsPage },
 ];
 
 const router = createRouter({
@@ -11,4 +13,3 @@ const router = createRouter({
 });
 
 export default router;
-
