@@ -1,21 +1,13 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router';
-import HelloWorld from './components/HelloWorld.vue'
-
+<script setup>
 const showAlert = () => {
   alert("Feature Coming Soon!");
 };
-
 </script>
 
 <template>
   <div class="container">
     <header>
       <h1>Android on Desktop</h1>
-      <nav>
-        <router-link to="/">Home</router-link>
-        <router-link to="/about">About</router-link>
-      </nav>
     </header>
 
     <main>
@@ -23,10 +15,9 @@ const showAlert = () => {
       <p>Control your PC, get notifications, and more!</p>
       <button @click="showAlert">Get Started</button>
     </main>
-
-    <router-view></router-view>
   </div>
 </template>
+
 
 <style>
 body {
@@ -45,12 +36,6 @@ header {
   background: #333;
   color: white;
   padding: 10px;
-}
-
-nav a {
-  color: white;
-  margin: 0 10px;
-  text-decoration: none;
 }
 
 main {
