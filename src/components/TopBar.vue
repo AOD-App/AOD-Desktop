@@ -1,6 +1,6 @@
 <template>
   <header>
-    <span class="settings-icon">⚙️</span>
+    <span class="settings-icon" @click="$router.push('/settings')">⚙️</span>
     <h1>Android On Desktop</h1>
   </header>
   <div class="content">
