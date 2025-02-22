@@ -1,68 +1,92 @@
 <template>
   <div class="settings-container">
     <h1>Settings</h1>
-    <p class="custom-text">Customize your preferences here.</p>
 
-    <div class="switch-button">
-      <!-- From Uiverse.io by vinodjangid07 -->
-      <input id="checkboxInput" type="checkbox" v-model="isChecked" />
-      <label class="toggleSwitch" for="checkboxInput"></label>
+    <!-- Toggle: Allow Command Execution -->
+    <div class="setting">
+      <span>Allow Command Execution</span>
+      <label>
+        <input id="checkboxInput" type="checkbox" v-model="settings.allowCommandExecution" @change="saveSettings">
+        <div class="toggleSwitch"></div>
+      </label>
     </div>
 
+    <!-- Toggle: Forward Notifications -->
+    <div class="setting">
+      <span>Forward Notifications</span>
+      <label>
+        <input id="checkboxInput" type="checkbox" v-model="settings.forwardNotifications" @change="saveSettings">
+        <div class="toggleSwitch"></div>
+      </label>
+    </div>
   </div>
 </template>
 
 <script>
+import { ref, onMounted } from "vue";
+
 export default {
   name: "SettingsPage",
-  data() {
-    return {
-      isChecked: false, // Initial state of toggle switch
+  setup() {
+    const settings = ref({ allowCommandExecution: false, forwardNotifications: false });
+
+    // Load settings from JSON file
+    const loadSettings = async () => {
+      try {
+        const response = await fetch("/settings.json");
+        const data = await response.json();
+        settings.value = data;
+      } catch (error) {
+        console.error("Failed to load settings:", error);
+      }
     };
+
+    // Save settings to JSON file
+    const saveSettings = async () => {
+      try {
+        await fetch("/save-settings", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(settings.value),
+        });
+      } catch (error) {
+        console.error("Failed to save settings:", error);
+      }
+    };
+
+    onMounted(loadSettings);
+
+    return { settings, saveSettings };
   },
 };
 </script>
 
 <style scoped>
 .settings-container {
-  text-align: center;
-  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  min-height: 100vh;
-  padding-top: 8%;
-  --s: 7px;
-
-  --c: #0000, #282828 0.5deg 119.5deg, #0000 120deg;
-  --g1: conic-gradient(from 60deg at 56.25% calc(425% / 6), var(--c));
-  --g2: conic-gradient(from 180deg at 43.75% calc(425% / 6), var(--c));
-  --g3: conic-gradient(from -60deg at 50% calc(175% / 12), var(--c));
-  background: var(--g1), var(--g1) var(--s) calc(1.73 * var(--s)), var(--g2),
-    var(--g2) var(--s) calc(1.73 * var(--s)), var(--g3) var(--s) 0,
-    var(--g3) 0 calc(1.73 * var(--s)) #1e1e1e;
-  background-size: calc(2 * var(--s)) calc(3.46 * var(--s));
+  justify-content: center;
+  height: 100vh;
+  background-color: #222;
+  color: white;
+  text-align: center;
 }
 
-.custom-text {
-  color: rgb(255, 255, 255);
-  font-weight: bold;
-  font-size: 18px;
+.setting {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 300px;
+  margin: 10px 0;
 }
 
-h1 {
-  color: rgb(255, 255, 255);
-  font-size: 30px;
-  font-weight: bold;
-}
-
-/* From Uiverse.io by vinodjangid07 */
-/* To hide the checkbox */
-#checkboxInput {
+/* Hide the checkbox */
+input[type="checkbox"] {
   display: none;
 }
 
+/* Toggle Switch Styling */
 .toggleSwitch {
   display: flex;
   align-items: center;
@@ -88,13 +112,13 @@ h1 {
   box-shadow: 5px 2px 7px rgba(8, 8, 8, 0.308);
 }
 
-#checkboxInput:checked + .toggleSwitch::after {
+input:checked + .toggleSwitch::after {
   transform: translateX(100%);
   transition-duration: .3s;
 }
 
 /* Switch background change */
-#checkboxInput:checked + .toggleSwitch {
+input:checked + .toggleSwitch {
   background-color: rgb(153, 197, 151);
   transition-duration: .3s;
 }
