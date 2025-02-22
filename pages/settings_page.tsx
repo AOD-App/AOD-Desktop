@@ -10,14 +10,16 @@ export default function SettingsPage() {
   const [darkMode, setDarkMode] = useState(false);
   const [notifications, setNotifications] = useState(true);
   const [performanceMode, setPerformanceMode] = useState("balanced");
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // For navigation
 
   return (
     <div className="p-6 max-w-lg mx-auto">
-      <div className="flex items-center mb-4">
-        <Settings className="cursor-pointer" onClick={() => navigate("/settings")} />
+      {/* Settings Header */}
+      <div className="flex items-center justify-between px-4 py-2 bg-gray-800 text-white">
+        <Settings className="cursor-pointer text-2xl hover:text-gray-300" onClick={() => navigate("/settings")} />
         <h1 className="text-2xl font-semibold ml-2">Settings</h1>
       </div>
+
       <Card>
         <CardContent className="p-4 space-y-4">
           <div className="flex justify-between items-center">
@@ -36,6 +38,7 @@ export default function SettingsPage() {
               <SelectItem value="battery-saver">Battery Saver</SelectItem>
             </Select>
           </div>
+          {/* Button to go back to Home Page */}
           <Button variant="outline" className="w-full" onClick={() => navigate("/")}>Back to Home</Button>
         </CardContent>
       </Card>
