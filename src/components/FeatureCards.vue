@@ -9,9 +9,9 @@
 
 <script setup>
 const features = [
-  { title: "Screen Mirror", description: "Mirror your phone screen to your PC" },
-  { title: "Transfer Files", description: "Quickly transfer files between devices" },
-  { title: "Remote Control", description: "Control your PC using your phone" },
+  { title: "Screen Mirror", description: "Mirror your phone screen to your PC seamlessly." },
+  { title: "Transfer Files", description: "Transfer files quickly between your phone and PC." },
+  { title: "Remote Control", description: "Control your PC using your mobile device effortlessly." },
 ];
 </script>
 
@@ -19,21 +19,32 @@ const features = [
 .cards-container {
   display: flex;
   justify-content: center;
-  gap: 15px;
-  margin-top: 20px;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 30px;
+  padding: 10px;
 }
 
 .card {
   background: white;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-  width: 200px;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.1);
+  width: 250px;
   text-align: center;
   cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
 }
 
 .card:hover {
-  background: #f1f1f1;
+  transform: translateY(-5px);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  .cards-container {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 </style>

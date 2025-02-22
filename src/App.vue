@@ -1,12 +1,7 @@
 <template>
   <div class="app-container">
-    <!-- Top Bar Component -->
     <TopBar />
-
-    <!-- Connection Status -->
     <ConnectionStatus />
-
-    <!-- Feature Cards -->
     <FeatureCards />
   </div>
 </template>
@@ -19,13 +14,14 @@ import FeatureCards from "./components/FeatureCards.vue";
 
 <style>
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Poppins", Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
+  background: #f4f4f4;
 }
 
 .app-container {
   text-align: center;
+  padding: 20px;
 }
 </style>
