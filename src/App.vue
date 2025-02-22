@@ -1,15 +1,12 @@
-<template>
-  <div class="app-container">
+\<template>
+  <div id="app">
     <TopBar />
-    <ConnectionStatus />
-    <FeatureCards />
+    <router-view />  <!-- This will render HomePage OR SettingsPage -->
   </div>
 </template>
 
 <script setup>
-import TopBar from "./components/TopBar.vue";
-import ConnectionStatus from "./components/ConnectionStatus.vue";
-import FeatureCards from "./components/FeatureCards.vue";
+import TopBar from "@/components/TopBar.vue";
 </script>
 
 <style>
@@ -19,26 +16,5 @@ body {
   padding: 0;
   box-sizing: border-box;
   background: #f4f4f4;
-}
-
-.app-container {
-  text-align: center;
-  padding: 20px;
-  display: flex;
-  flex-direction:column;
-  align-items: center;
-  justify-content:flex-start; /* Spreads content evenly */
-  min-height: 100vh; /* Ensures full-screen coverage */
-  padding-top: 60px;
-  --s: 7px; /* control the size */
-
-  --c: #0000, #282828 0.5deg 119.5deg, #0000 120deg;
-  --g1: conic-gradient(from 60deg at 56.25% calc(425% / 6), var(--c));
-  --g2: conic-gradient(from 180deg at 43.75% calc(425% / 6), var(--c));
-  --g3: conic-gradient(from -60deg at 50% calc(175% / 12), var(--c));
-  background: var(--g1), var(--g1) var(--s) calc(1.73 * var(--s)), var(--g2),
-    var(--g2) var(--s) calc(1.73 * var(--s)), var(--g3) var(--s) 0,
-    var(--g3) 0 calc(1.73 * var(--s)) #1e1e1e;
-  background-size: calc(2 * var(--s)) calc(3.46 * var(--s));
 }
 </style>
